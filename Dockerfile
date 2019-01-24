@@ -17,9 +17,6 @@ RUN apt-get update \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn \
   && rm -r /var/lib/apt/lists/*
 
-RUN (cd workspace && mvn package) \
-  && cp workspace/target/benchmarks.jar /
-
 # install glowroot
 RUN curl -L https://github.com/glowroot/glowroot/releases/download/v$GLOWROOT_VERSION/glowroot-$GLOWROOT_VERSION-dist.zip > glowroot-dist.zip \
   && unzip glowroot-dist.zip \
@@ -29,6 +26,9 @@ RUN curl -L https://github.com/glowroot/glowroot/releases/download/v$GLOWROOT_VE
 RUN mkdir newrelic \
   && curl -L http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-agent/$NEWRELIC_VERSION/newrelic-agent-$NEWRELIC_VERSION.jar > newrelic/newrelic.jar
 COPY newrelic.yml newrelic/
+
+RUN (cd workspace && mvn package) \
+  && cp workspace/target/benchmarks.jar /
 
 EXPOSE 8080
 EXPOSE 4000
