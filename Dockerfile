@@ -3,6 +3,7 @@ FROM azul/zulu-openjdk
 ENV MAVEN_MAJOR_VERSION 3
 ENV MAVEN_VERSION 3.3.9
 ENV GLOWROOT_VERSION 0.9.1
+ENV NEWRELIC_VERSION 4.10.0
 
 # build and install benchmark
 COPY pom.xml /workspace/
@@ -23,6 +24,11 @@ RUN (cd workspace && mvn package) \
 RUN curl -L https://github.com/glowroot/glowroot/releases/download/v$GLOWROOT_VERSION/glowroot-$GLOWROOT_VERSION-dist.zip > glowroot-dist.zip \
   && unzip glowroot-dist.zip \
   && rm glowroot-dist.zip
+
+# install newrelic
+RUN mkdir newrelic \
+  && curl -L http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-agent/$NEWRELIC_VERSION/newrelic-agent-$NEWRELIC_VERSION.jar > newrelic/newrelic.jar
+COPY newrelic.yml newrelic/
 
 EXPOSE 8080
 EXPOSE 4000

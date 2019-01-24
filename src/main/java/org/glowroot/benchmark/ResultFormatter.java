@@ -32,8 +32,10 @@ public class ResultFormatter {
 
         Score baseline = readScore(results, ServletBenchmark.class.getName(), StartupBenchmark.class.getName());
         Score glowroot = readScore(results, ServletWithGlowrootBenchmark.class.getName(), StartupWithGlowrootBenchmark.class.getName());
+        Score newrelic = readScore(results, ServletWithNewRelicBenchmark.class.getName(), StartupWithNewRelicBenchmark.class.getName());
 
         printScores(baseline, glowroot, "glowroot");
+        printScores(baseline, newrelic, "newrelic");
     }
 
     private static Score readScore(ArrayNode results, String responseTimeBenchmarkName, String startupBenchmarkName) {
