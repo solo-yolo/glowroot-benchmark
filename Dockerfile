@@ -27,9 +27,6 @@ RUN mkdir newrelic \
   && curl -L http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-agent/$NEWRELIC_VERSION/newrelic-agent-$NEWRELIC_VERSION.jar > newrelic/newrelic.jar
 COPY newrelic.yml newrelic/
 
-RUN mkdir stackify
-COPY /usr/local/stackify/stackify-java-apm/stackify-java-apm.jar stackify/
-
 RUN (cd workspace && mvn package) \
   && cp workspace/target/benchmarks.jar /
 
