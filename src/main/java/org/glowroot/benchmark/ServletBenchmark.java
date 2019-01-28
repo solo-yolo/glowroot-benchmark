@@ -36,9 +36,9 @@ import org.openjdk.jmh.annotations.Warmup;
 @BenchmarkMode(Mode.SampleTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @State(Scope.Thread)
-@Fork(10)
-@Warmup(iterations = 10)
-@Measurement(iterations = 25)
+@Fork(1)
+@Warmup(iterations = 0)
+@Measurement(iterations = 1)
 public class ServletBenchmark {
 
     static {
