@@ -1,5 +1,6 @@
 FROM azul/zulu-openjdk
 
+ARG newrelic_license
 ARG stackify_license
 ARG stackify_env=local
 
@@ -36,6 +37,7 @@ RUN curl -L https://github.com/glowroot/glowroot/releases/download/v$GLOWROOT_VE
 RUN mkdir newrelic \
   && curl -L http://central.maven.org/maven2/com/newrelic/agent/java/newrelic-agent/$NEWRELIC_VERSION/newrelic-agent-$NEWRELIC_VERSION.jar > newrelic/newrelic.jar
 COPY newrelic.yml newrelic/
+RUN sed -i 's/LICENSE_PLACEHOLDER/$newrelic_license/g' newrelic/newrelic.yml
 
 RUN (cd workspace && mvn package) \
   && cp workspace/target/benchmarks.jar /
