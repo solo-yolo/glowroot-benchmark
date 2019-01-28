@@ -25,7 +25,7 @@ RUN curl -L https://s1.stackify.com/Account/AgentDownload/Linux > stackify.tar.g
   && tar -zxvf stackify.tar.gz stackify-agent-install-32bit \
   && (cd stackify-agent-install-32bit && ./agent-install.sh --key $stackify_license --environment $stackify_env) \
   && mkdir stackify \
-  && ln -s /usr/local/stackify/stackify-java-apm/stackify-java-apm.jar stackify/stackify-java-apm.jar
+  && ln -s /usr/local/stackify/stackify-java-apm/stackify-java-apm.jar stackify/stackify-java-apm.jar \
   && rm stackify.tar.gz
 
 # install glowroot
