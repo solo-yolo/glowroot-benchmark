@@ -34,7 +34,7 @@ import org.openjdk.jmh.annotations.TearDown;
 import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.SingleShotTime)
-@Fork(10)
+@Fork(1)
 @Warmup(iterations = 0)
 @Measurement(iterations = 1)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
