@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk
+FROM ubuntu:16.04
 
 ARG newrelic_license
 ARG stackify_license
@@ -12,6 +12,13 @@ ENV NEWRELIC_VERSION 4.10.0
 # build and install benchmark
 COPY pom.xml /workspace/
 COPY src /workspace/src/
+
+RUN apt-get update && \
+      apt install -y software-properties-common && \
+      echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+      add-apt-repository -y ppa:webupd8team/java && \
+      apt-get update && \
+      apt-get install -y oracle-java8-installer
 
 # install curl, git(?), unzip, mvn, sudo (required by stackify installation script)
 RUN apt-get update \
